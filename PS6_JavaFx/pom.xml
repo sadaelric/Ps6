@@ -25,7 +25,11 @@
 		<junit.version>4.11</junit.version>
 
 	</properties>
-	
+	<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
 	<dependencies>
 		<!-- Spring and Transactions -->
 		<dependency>
@@ -82,7 +86,11 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>	
-	
+	<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
 		<build>
 		<plugins>
 		
