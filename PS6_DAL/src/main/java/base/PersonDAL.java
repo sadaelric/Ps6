@@ -37,19 +37,19 @@ public class PersonDAL {
 	public static ArrayList<PersonDomainModel> getPersons() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		PersonDomainModel stuGet = null;		
+		PersonDomainModel stuGet = null;
 		ArrayList<PersonDomainModel> pers = new ArrayList<PersonDomainModel>();
-		
+
 		try {
-			tx = session.beginTransaction();	
-			
+			tx = session.beginTransaction();
+
 			List persons = session.createQuery("FROM PersonDomainModel").list();
 			for (Iterator iterator = persons.iterator(); iterator.hasNext();) {
 				PersonDomainModel per = (PersonDomainModel) iterator.next();
 				pers.add(per);
 
 			}
-			
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -59,26 +59,25 @@ public class PersonDAL {
 			session.close();
 		}
 		return pers;
-	}		
-			
-		return null;
+
+
 
 	}
 
 	public static PersonDomainModel getPerson(UUID perID) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		PersonDomainModel perGet = null;		
-		
+		PersonDomainModel perGet = null;
+
 		try {
-			tx = session.beginTransaction();	
-									
+			tx = session.beginTransaction();
+
 			Query query = session.createQuery("from PersonDomainModel where personId = :id ");
 			query.setParameter("id", perID.toString());
-			
+
 			List<?> list = query.list();
-			perGet = (PersonDomainModel)list.get(0);
-			
+			perGet = (PersonDomainModel) list.get(0);
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -86,23 +85,22 @@ public class PersonDAL {
 			e.printStackTrace();
 		} finally {
 			session.close();
-				
-		return perGet;
+
+			return perGet;
 		}
 	}
 
 	public static void deletePerson(UUID perID) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		PersonDomainModel perGet = null;		
-		
+		PersonDomainModel perGet = null;
+
 		try {
-			tx = session.beginTransaction();	
-									
+			tx = session.beginTransaction();
+
 			PersonDomainModel per = (PersonDomainModel) session.get(PersonDomainModel.class, perID);
 			session.delete(per);
-		
-			
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -116,14 +114,13 @@ public class PersonDAL {
 	public static PersonDomainModel updatePerson(PersonDomainModel per) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		PersonDomainModel perGet = null;		
-		
+		PersonDomainModel perGet = null;
+
 		try {
-			tx = session.beginTransaction();	
-									
+			tx = session.beginTransaction();
+
 			session.update(per);
-	
-			
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -131,8 +128,7 @@ public class PersonDAL {
 			e.printStackTrace();
 		} finally {
 			session.close();
-		}		
+		}
 		return per;
 	}
-}
 }
